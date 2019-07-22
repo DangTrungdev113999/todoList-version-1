@@ -1,4 +1,5 @@
-import React, { Component, Fragment } from 'react'
+import React, { Component, Fragment } from 'react';
+import { NavLink } from 'react-router-dom';
 
 class NavBar extends Component {
     render() {
@@ -8,13 +9,13 @@ class NavBar extends Component {
                         <a className="navbar-brand">Todo List</a>
                         <ul className="nav navbar-nav">
                             <li className="active">
-                                <a>Trang chủ</a>
+                                <NavLink to='/' exact = {true}>Trang chủ</NavLink>
                             </li>
                             <li>
-                                <a>Đang làm</a>
+                                <NavLink to='/asdf' exact = {false}>Đang làm</NavLink>
                             </li>
                             <li>
-                                <a>Hoàn Thành</a>
+                                <NavLink to='/asdfasdf' exact = {false}>Hoàn Thành</NavLink>
                             </li>
                         </ul>
                     </nav>
