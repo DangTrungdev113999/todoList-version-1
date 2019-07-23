@@ -2,7 +2,12 @@ import React, { Component } from 'react';
 
 class TaskForm extends Component {
 
+    onCloseForm = () => {
+        this.props.isCloseFrom();
+    }
+
     render() {
+
         return (
             <div className="panel panel-primary">
                 <div className="panel-heading">
@@ -10,6 +15,7 @@ class TaskForm extends Component {
                         Thêm Công Việc
                         <span 
                             className="glyphicon glyphicon-remove text-right"
+                            onClick={this.onCloseForm}
                         ></span>
                     </h3>
                 </div>
