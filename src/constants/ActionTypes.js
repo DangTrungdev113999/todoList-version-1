@@ -1,5 +1,9 @@
 export const RENDER_WORKS = 'RENDER_WORKS';
+export const SAVE_WORK = 'SAVE_WORK';
+export const UPDATE_STATUS_WORK = 'UPDATE_STATUS_WORK';
+export const DELETE_WORK = 'UPDATE_STATUS_WORK';
+export const EDIT_WORK = 'UPDATE_STATUS_WORK';
 
 
-export const OPEN_FROM = 'OPEN_FROM';
-export const CLOSE_FROM = 'CLOSE_FROM';
+export const OPEN_FORM = 'OPEN_FORM';
+export const CLOSE_FORM = 'CLOSE_FORM';

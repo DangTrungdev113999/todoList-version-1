@@ -1,33 +1,44 @@
 import * as Types from './../constants/ActionTypes';
-import axios from 'axios';
+import callApi from './../utils/callApi';
 
 export const actOpenForm = () => {
     return {
-        type: Types.OPEN_FROM
-    }
-}
+        type: Types.OPEN_FORM
+    };
+};
 
 export const actCloseForm = () => {
     return {
-        type: Types.CLOSE_FROM
-    }
-}
+        type: Types.CLOSE_FORM
+    };
+};
 
 export const actRenderWorksReques = () => {
     return dispatch => {
-        return axios({
-            method: 'GET',
-            url: 'https://5d35c5105b83cd0014d0b359.mockapi.io/api/v1/works',
-            data: null
-        }).then(res => {
+        return callApi('GET', 'works', null).then(res => {
             dispatch(actRenderWorks(res.data));
-        })
-    }
-}
+        });
+    };
+};
 
 export const actRenderWorks = works => {
     return {
         type: Types.RENDER_WORKS,
         works
-    }
-}
+    };
+};
+
+export const actSaveWorkRequest = work => {
+    return dispatch => {
+        return callApi('POST', 'works', work).then(res => {
+            dispatch(actSaveWork(res.data));
+        });
+    };
+};
+
+export const actSaveWork = work => {
+    return {
+        type: Types.SAVE_WORK,
+        work
+    };
+};

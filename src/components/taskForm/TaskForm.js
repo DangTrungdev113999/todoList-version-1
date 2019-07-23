@@ -1,13 +1,54 @@
 import React, { Component } from 'react';
 
 class TaskForm extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            id: '',
+            txtName: '',
+            sltStatus: false
+        };
+    };
 
     onCloseForm = () => {
-        this.props.isCloseFrom();
-    }
+        this.props.isCloseForm();
+    };
 
+    onGetValue = e => {
+        const target = e.target;
+        const name = target.name;
+        let value = (target.type === 'checkbox') ? target.cheked : target.value;
+        if(name === 'sltStatus') {
+            value = "true" ? true : false;
+        }
+
+        this.setState({
+            [name]: value
+        });
+    };
+
+    onSaveWork = e => {
+        e.preventDefault();
+        const { id, txtName, sltStatus } = this.state;
+        this.props.onSaveWork({
+            id,
+            name: txtName,
+            status: sltStatus
+        });
+
+        this.onRestForm();
+        this.props.isCloseForm();
+    };
+
+    onRestForm = () => {
+        this.setState({
+            id: '',
+            txtName: '',
+            sltStatus: false
+        })
+    } 
     render() {
-
+        const { txtName ,sltStatus  } = this.state;
         return (
             <div className="panel panel-primary">
                 <div className="panel-heading">
@@ -20,19 +61,23 @@ class TaskForm extends Component {
                     </h3>
                 </div>
                 <div className="panel-body">
-                    <form>
+                    <form onSubmit={this.onSaveWork}>
                         <div className="form-group">
                             <label>Tên :</label>
                             <input
                                 type="text"
                                 className="form-control"
-                                name="name"
+                                name="txtName"
+                                value={txtName}
+                                onChange={this.onGetValue}
                             />
                         </div>
                         <label>Trạng Thái :</label>
                         <select
                             className="form-control"
-                            name = 'status'
+                            name = 'sltStatus'
+                            value={sltStatus}
+                            onChange={this.onGetValue}
                         >
                             <option value = {true}>Kích Hoạt</option>
                             <option value = {false}>Ẩn</option>
@@ -41,6 +86,7 @@ class TaskForm extends Component {
                             <button 
                                 type="submit" 
                                 className="btn btn-warning"
+                                onSubmit={this.onSaveWork}
                                 >
                                 <span className="fa fa-plus mr-5"></span>Lưu Lại
                             </button>&nbsp;
@@ -51,8 +97,8 @@ class TaskForm extends Component {
                     </form>
                 </div>
             </div>
-        )
-    }
-}
+        );
+    };
+};
 
 export default TaskForm;

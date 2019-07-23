@@ -4,11 +4,17 @@ import { connect } from 'react-redux';
 import * as actions from './../actions/index';
 
 class taskFormContainer extends Component {
+
+    onSaveWork = work => {
+        this.props.onSaveWork(work);
+    }
+
     render() {
         return (
             <Fragment>
                 <TaskFrom
-                    isCloseFrom={this.props.isCloseFrom}
+                    isCloseForm={this.props.isCloseForm}
+                    onSaveWork={this.onSaveWork}
                 />
             </Fragment>
         )
@@ -23,9 +29,12 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = (dispatch, props) => {
     return {
-        isCloseFrom: () => {
+        isCloseForm: () => {
             dispatch(actions.actCloseForm());
-        }
+        },
+        onSaveWork: work => {
+            dispatch(actions.actSaveWorkRequest(work));
+        },
     }
 }
 
