@@ -2,6 +2,14 @@ import React, { Component, Fragment } from 'react';
 
 class TaskItem extends Component {
 
+    onDeleteWork = id => {
+        this.props.onDeleteWork(id);
+    }
+
+    onUpdateWorkStatus = work => {
+        this.props.onUpdateWorkStatus(work);
+    }
+
     render() {
         const { work, index } = this.props;
         return (
@@ -10,8 +18,14 @@ class TaskItem extends Component {
                     <td>{index + 1}</td>
                     <td>{work.name}</td>
                     <td>
-                        {!work.status && <span className="label label-danger"> Ẩn </span>}
-                        {work.status && <span className="label label-success"> Kích hoạt </span>}
+                        <span 
+                            className={ work.status ? "label label-success" : "label label-danger"}
+                            onClick={() => this.onUpdateWorkStatus(work)}
+                        > 
+                            { work.status && 'kích hoạt' }
+                            { !work.status && 'Ẩn' }
+                        </span>
+                        {work.status && <span className="label label-primary right"> Làm </span>}
                     </td>
                     <td>
                         <button
@@ -23,6 +37,7 @@ class TaskItem extends Component {
                     <button
                             type="button"
                             className="btn btn-danger"
+                            onClick={ () => this.onDeleteWork(work.id)}
                         >
                             <span className="glyphicon glyphicon-remove-sign"></span> Xoá
                     </button>

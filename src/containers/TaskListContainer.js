@@ -10,6 +10,14 @@ class TaskListContainer extends Component {
         this.props.onRenderWorks();
     }
 
+    onDeleteWork = id => {
+        this.props.onDeleteWork(id);
+    }
+
+    onUpdateWorkStatus = work => {
+        this.props.onUpdateWorkStatus(work);
+    }
+
     render() {
         const { works } = this.props
         return (
@@ -30,6 +38,8 @@ class TaskListContainer extends Component {
                         key={index}
                         work={work}
                         index={index}
+                        onDeleteWork={this.onDeleteWork}
+                        onUpdateWorkStatus={this.onUpdateWorkStatus}
                     />
                 );
             })
@@ -48,6 +58,12 @@ const mapDispatchToProps = (dispatch, props) => {
     return {
         onRenderWorks: () => {
             dispatch(actions.actRenderWorksReques());
+        },
+        onDeleteWork: id => {
+            dispatch(actions.actDeleteWorkRequest(id));
+        },
+        onUpdateWorkStatus: work => {
+            dispatch(actions.actUpdateWorkStatusRequest(work));
         }
     }
 }

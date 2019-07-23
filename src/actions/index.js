@@ -42,3 +42,37 @@ export const actSaveWork = work => {
         work
     };
 };
+
+export const actDeleteWorkRequest = id => {
+    return dispatch => {
+        return callApi('DELETE', `works/${id}`, null).then(res => {
+            dispatch(actDeleteWork(id));
+        })
+    }
+}
+
+export const actDeleteWork = id => {
+    return {
+        type: Types.DELETE_WORK,
+        id
+    }
+}
+
+export const actUpdateWorkStatusRequest = work => {
+    return dispatch => {
+        return callApi('PUT', `works/${work.id}`, {
+            id: work.id,
+            name: work.name,
+            status: !work.status
+        }).then(res => {
+            dispatch(actUpdateWorkStatus(work.id));
+        })
+    }
+}
+
+export const actUpdateWorkStatus = id => {
+    return {
+        type: Types.UPDATE_STATUS_WORK,
+        id
+    }
+}
