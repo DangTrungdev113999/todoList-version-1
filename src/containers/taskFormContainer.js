@@ -5,16 +5,13 @@ import * as actions from './../actions/index';
 
 class taskFormContainer extends Component {
 
-    onSaveWork = work => {
-        this.props.onSaveWork(work);
-    }
-
     render() {
         return (
             <Fragment>
                 <TaskFrom
                     isCloseForm={this.props.isCloseForm}
-                    onSaveWork={this.onSaveWork}
+                    onSaveWork={(work) => this.props.onSaveWork(work)}
+                    workEditting={this.props.workEditting}
                 />
             </Fragment>
         )
@@ -23,7 +20,7 @@ class taskFormContainer extends Component {
 
 const mapStateToProps = state => {
     return {
-
+        workEditting: state.workEditting
     }
 }
 
@@ -34,7 +31,7 @@ const mapDispatchToProps = (dispatch, props) => {
         },
         onSaveWork: work => {
             dispatch(actions.actSaveWorkRequest(work));
-        },
+        }
     }
 }
 

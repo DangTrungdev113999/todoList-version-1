@@ -30,8 +30,14 @@ export const actRenderWorks = works => {
 
 export const actSaveWorkRequest = work => {
     return dispatch => {
+        if (work.id) {
+            return callApi('PUT', `works/${work.id}`, work).then(res => {
+                dispatch(actSaveWork(res.data));
+            })
+        }
+
         return callApi('POST', 'works', work).then(res => {
-            dispatch(actSaveWork(res.data));
+            dispatch(actSaveWork(work));
         });
     };
 };
@@ -74,5 +80,39 @@ export const actUpdateWorkStatus = id => {
     return {
         type: Types.UPDATE_STATUS_WORK,
         id
+    }
+}
+
+export const actGetWorkEditting = work => {
+    return {
+        type: Types.GET_WORK_EDITTING,
+        work
+    }
+}
+
+export const actFilterWork = value => {
+    return {
+        type: Types.FILTER_WORK,
+        value
+    }
+}
+
+export const actResetForm = () => {
+    return {
+        type: Types.RESET_FORM
+    }
+}
+
+export const actSearchWord = keyword => {
+    return {
+        type: Types.SEARCH,
+        keyword
+    }
+}
+
+export const actSortWord = value => {
+    return {
+        type: Types.SORT,
+        value
     }
 }

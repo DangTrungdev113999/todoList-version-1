@@ -10,8 +10,24 @@ class TaskForm extends Component {
         };
     };
 
-    onCloseForm = () => {
-        this.props.isCloseForm();
+    componentWillMount() {
+        const {id ,name, status} = this.props.workEditting
+        this.setState({
+            id,
+            txtName: name,
+            sltStatus: status
+        })
+    }
+
+    componentWillReceiveProps(nextProp) {
+        if(nextProp && nextProp.workEditting) {
+            const { id, name, status } = nextProp.workEditting;
+            this.setState({
+                id,
+                txtName: name,
+                sltStatus: status
+            })
+        }
     };
 
     onGetValue = e => {
@@ -48,15 +64,15 @@ class TaskForm extends Component {
         })
     } 
     render() {
-        const { txtName ,sltStatus  } = this.state;
+        const { txtName ,sltStatus, id  } = this.state;
         return (
-            <div className="panel panel-primary">
+            <div className={ id ? "panel panel-warning" : "panel panel-primary" }>
                 <div className="panel-heading">
                     <h3 className="panel-title">
-                        Thêm Công Việc
+                        { id ? "Cập nhật công việc" : "Thêm công việc" }
                         <span 
                             className="glyphicon glyphicon-remove text-right"
-                            onClick={this.onCloseForm}
+                            onClick={() => this.props.isCloseForm()}
                         ></span>
                     </h3>
                 </div>
@@ -90,7 +106,11 @@ class TaskForm extends Component {
                                 >
                                 <span className="fa fa-plus mr-5"></span>Lưu Lại
                             </button>&nbsp;
-                            <button type="button" className="btn btn-danger">
+                            <button 
+                                type="button" 
+                                className="btn btn-danger"
+                                onClick={this.onRestForm }
+                            >
                                 <span className="fa fa-close mr-5"></span>Hủy Bỏ
                             </button>
                         </div>

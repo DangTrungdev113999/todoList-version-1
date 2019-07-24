@@ -3,8 +3,8 @@ import React, { Component } from 'react';
 class TaskContrlSort extends Component {
     render() {
         return (
-        <div>
-            <div className="dropdown">
+            <div>
+                <div className="dropdown">
                     <button
                         className="btn btn-primary dropdown-toggle"
                         type="button"
@@ -16,7 +16,7 @@ class TaskContrlSort extends Component {
                         Sắp Xếp <span className="fa fa-caret-square-o-down ml-5"></span>
                     </button>
                     <ul className="dropdown-menu" aria-labelledby="dropdownMenu1">
-                        <li >
+                        <li onClick={() => this.props.onSortWork({ by: 'name', value: 1 })}>
                             <a
                                 role="button"
 
@@ -26,7 +26,7 @@ class TaskContrlSort extends Component {
                                 </span>
                             </a>
                         </li>
-                        <li>
+                        <li onClick={() => this.props.onSortWork({ by: 'name', value: -1 })}>
                             <a
                                 role="button"
 
@@ -37,7 +37,7 @@ class TaskContrlSort extends Component {
                             </a>
                         </li>
                         <li role="separator" className="divider"></li>
-                        <li>
+                        <li onClick={() => this.props.onSortWork({ by: 'staus', value: 1 })}>
                             <a
                                 role="button"
 
@@ -45,7 +45,7 @@ class TaskContrlSort extends Component {
                                 Trạng Thái Kích Hoạt
                             </a>
                         </li>
-                        <li>
+                        <li onClick={() => this.props.onSortWork({ by: 'staus', value: -1 })}>
                             <a
                                 role="button"
 
@@ -55,7 +55,7 @@ class TaskContrlSort extends Component {
                         </li>
                     </ul>
                 </div>
-        </div>
+            </div>
         )
     }
 }

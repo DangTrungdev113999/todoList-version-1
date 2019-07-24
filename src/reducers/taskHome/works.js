@@ -4,10 +4,10 @@ const DefaultState = [];
 
 const findIndex = (works, id) => {
     let result = -1;
-    if(works.length > 0) {
-        works.forEach((work,  index) => {
-            if(work.id === id) {
-                result =  index;
+    if (works.length > 0) {
+        works.forEach((work, index) => {
+            if (work.id === id) {
+                result = index;
             };
         });
     }
@@ -16,21 +16,27 @@ const findIndex = (works, id) => {
 
 const myReducer = (state = DefaultState, action) => {
     let index = -1;
-    switch(action.type) {
+    switch (action.type) {
         case Types.RENDER_WORKS:
             return action.works;
-        case Types.SAVE_WORK: 
-            state.push(action.work);
+        case Types.SAVE_WORK:
+            console.log(action.work.id);
+            if (action.work.id) {
+                index = findIndex(state, action.work.id);
+                state[index] = action.work;
+            } else {
+                state.push(action.work);
+            }
             return [...state];
         case Types.DELETE_WORK:
             index = findIndex(state, action.id);
-            if(index !== -1) {
+            if (index !== -1) {
                 state.splice(index, 1);
             }
             return [...state];
         case Types.UPDATE_STATUS_WORK:
             index = findIndex(state, action.id);
-            state[index] = { ...state[index], status: !state[index].status}
+            state[index] = { ...state[index], status: !state[index].status }
             return [...state]
         default: return [...state];
     };

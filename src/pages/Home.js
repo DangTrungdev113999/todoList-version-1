@@ -9,6 +9,7 @@ class Home extends Component {
 
     onOpenForm = () => {
         this.props.isOpenForm();
+        this.props.onResetForm();
     }
 
     render() {
@@ -57,6 +58,9 @@ const mapDispatchToProps = (dispatch, props) => {
     return {
         isOpenForm: () => {
             dispatch(actions.actOpenForm());
+        },
+        onResetForm: () => {
+            dispatch(actions.actResetForm());
         }
     }
 }
