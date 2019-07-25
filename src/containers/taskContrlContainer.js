@@ -3,6 +3,7 @@ import TaskContrlSearch from './../components/taskContrl/TaskContrlSearch';
 import TaskContrlSort from './../components/taskContrl/TaskContrlSort';
 import { connect } from 'react-redux';
 import * as actions from './../actions/index';
+import PropTypes from 'prop-types';
 
 class TaskContrlContainer extends Component {
     render() {
@@ -23,11 +24,10 @@ class TaskContrlContainer extends Component {
     }
 }
 
-const mapStateToProps = state => {
-    return {
-
-    }
-};
+TaskContrlContainer.propTypes = {
+    onSearchWork: PropTypes.func.isRequired,
+    onSortWork: PropTypes.func.isRequired
+}
 
 const mapDispatchToProps = (dispatch, props) => {
     return {
@@ -40,4 +40,4 @@ const mapDispatchToProps = (dispatch, props) => {
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(TaskContrlContainer)
+export default connect(null, mapDispatchToProps)(TaskContrlContainer)

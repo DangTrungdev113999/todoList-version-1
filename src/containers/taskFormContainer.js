@@ -2,6 +2,7 @@ import React, { Component, Fragment } from 'react'
 import TaskFrom from '../components/taskForm/TaskForm';
 import { connect } from 'react-redux';
 import * as actions from './../actions/index';
+import PropTypes from 'prop-types';
 
 class taskFormContainer extends Component {
 
@@ -16,6 +17,16 @@ class taskFormContainer extends Component {
             </Fragment>
         )
     }
+}
+
+taskFormContainer.propTypes = {
+    workEditting: PropTypes.shape({
+        id: PropTypes.string.isRequired,
+        name: PropTypes.string.isRequired,
+        status: PropTypes.bool.isRequired
+    }),
+    isCloseForm: PropTypes.func.isRequired,
+    onSaveWork: PropTypes.func.isRequired
 }
 
 const mapStateToProps = state => {

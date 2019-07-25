@@ -3,6 +3,7 @@ import TaskList from './../components/taskList/TaskList';
 import TaskItem from './../components/taskList/TaskItem';
 import { connect } from 'react-redux';
 import * as actions from './../actions/index';
+import PropTypes from 'prop-types';
 
 class TaskListContainer extends Component {
 
@@ -77,6 +78,33 @@ class TaskListContainer extends Component {
         }
         return result;
     }
+}
+
+TaskListContainer.propTypes = {
+    works: PropTypes.arrayOf(PropTypes.shape({
+        id: PropTypes.string.isRequired,
+        name: PropTypes.string.isRequired,
+        status: PropTypes.bool
+    }).isRequired),
+    filterValue: PropTypes.shape({
+        filterName: PropTypes.string.isRequired,
+        filterStatus: PropTypes.number.isRequired
+    }),
+    searchAndSort: PropTypes.shape({
+        keyword: PropTypes.string.isRequired,
+        sort: PropTypes.shape({
+            by: PropTypes.string.isRequired,
+            value: PropTypes.number.isRequired
+        })
+    }),
+    onRenderWorks: PropTypes.func.isRequired,
+    onDeleteWork: PropTypes.func.isRequired,
+    onUpdateWorkStatus: PropTypes.func.isRequired,
+    onOpenForm: PropTypes.func.isRequired,
+    onGetWorkEditting: PropTypes.func.isRequired,
+    onCloseForm: PropTypes.func.isRequired,
+    onFilterWork: PropTypes.func.isRequired
+
 }
 
 const mapStateToProps = state => {

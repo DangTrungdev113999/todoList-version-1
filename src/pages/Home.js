@@ -4,6 +4,7 @@ import TaskControlContainer from './../containers/TaskContrlContainer';
 import TaskListContainer from './../containers/TaskListContainer';
 import { connect } from 'react-redux';
 import * as actions from './../actions/index';
+import PropTypes from 'prop-types';
 
 class Home extends Component {
 
@@ -46,6 +47,12 @@ class Home extends Component {
             </Fragment>
         )
     }
+}
+
+Home.propTypes = {
+    status: PropTypes.bool.isRequired,
+    isOpenForm: PropTypes.func.isRequired,
+    onResetForm: PropTypes.func.isRequired
 }
 
 const mapStateToProps = state => {
